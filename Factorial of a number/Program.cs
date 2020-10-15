@@ -34,6 +34,8 @@ namespace Factorial_of_a_number
         static double Calculate(int number)
         {
             double answer = 1, num = (double)number;
+            if (num == 0)
+                return 0;
             while (num > 0)
             {
                 answer *= num;
