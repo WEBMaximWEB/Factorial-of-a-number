@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using static System.Console;
 
 
@@ -8,48 +9,49 @@ namespace Factorial_of_a_number
     {
         static void Main(string[] args)
         {
-            int number, out_number;
+            int number;
             Console.Write("Введите целое число:");
             while (!Int32.TryParse(Console.ReadLine(), out number))
                 Console.WriteLine("Для вычисления факториала необходимо ввести целое число:");
 
-            out_number = Calculate(number);
+            Console.Clear();
 
-            Console.Write(Table("|", "|", "-", LenNumber(number), LenNumber(out_number)));
+            double out_number = Calculate(number);
+
+            Table(out_number, "╔", "═", "╗");
+            Table(out_number, "║", "",  "║");
+            Table(out_number, "╚", "═", "╝");
+
+
+            Console.Write("новая колбаса ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("ла ла ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("ла..");
         }
 
-        static int Calculate(int number)
+        static double Calculate(int number)
         {
-            int answer = 1;
-            while (number > 0)
+            double answer = 1, num = (double)number;
+            while (num > 0)
             {
-                answer *= number;
-                number -= 1;
+                answer *= num;
+                num -= 1;
             }
             return answer;
         }
 
-        static void Table(string start, string center, string line, int length_intput, int length_output, bool body = false, int number = 0, int answer = 0)
+        static void Table(double number, string corner1, string center, string corner2)
         {
-            Console.Write(start);
-            if (body)
-            {
-                Console.Write(number + center + answer);
-            }
+            Console.Write(corner1);
+            if (center == "")
+                Console.Write(number);
             else
             {
-                for (int i = 0; i < length_intput; i++)
-                    Console.Write(line);
-                Console.Write(center);
-                for (int i = 0; i < length_output; i++)
-                    Console.Write(line);
+                for (int i = 0; i < number.ToString().Length; i++)
+                    Console.Write(center);
             }
-            Console.Write(start);
-        }
-
-        static int LenNumber(int number)
-        {
-            return number.ToString().Length;
+            Console.WriteLine(corner2);
         }
     }
 }
