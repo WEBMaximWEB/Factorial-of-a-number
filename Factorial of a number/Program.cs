@@ -1,6 +1,5 @@
 ﻿using System;
-using System.IO;
-using static System.Console;
+using System.Threading.Tasks;
 
 
 namespace Factorial_of_a_number
@@ -14,20 +13,20 @@ namespace Factorial_of_a_number
             while (!Int32.TryParse(Console.ReadLine(), out number))
                 Console.WriteLine("Для вычисления факториала необходимо ввести целое число:");
 
-            Console.Clear();
-
             double out_number = Calculate(number);
 
-            Table(out_number, "╔", "═", "╗");
-            Table(out_number, "║", "",  "║");
-            Table(out_number, "╚", "═", "╝");
-
-
-            Console.Write("новая колбаса ");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("ла ла ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("ла..");
+            bool flag = true;
+            while (true)
+            {
+                Console.Clear();
+                Table(out_number, "╔", "═", "╗");
+                Table(out_number, "║", "", "║");
+                Table(out_number, "╚", "═", "╝");
+                TextColorChange(flag);
+                BackgroundColorChange(flag);
+                flag = !flag;
+            }
+            
         }
 
         static double Calculate(int number)
@@ -52,6 +51,34 @@ namespace Factorial_of_a_number
                     Console.Write(center);
             }
             Console.WriteLine(corner2);
+        }
+
+        static void TextColorChange(bool flag)
+        {
+                if (flag)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Task.Delay(80).Wait();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Task.Delay(80).Wait();
+                }
+        }
+
+        static void BackgroundColorChange(bool flag)
+        {
+            if (flag)
+            {
+                Console.BackgroundColor = System.ConsoleColor.Blue;
+                Task.Delay(80).Wait();
+            }
+            else
+            {
+                Console.BackgroundColor = System.ConsoleColor.DarkYellow;
+                Task.Delay(80).Wait();
+            }
         }
     }
 }
