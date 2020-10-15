@@ -13,9 +13,10 @@ namespace Factorial_of_a_number
             while (!Int32.TryParse(Console.ReadLine(), out number))
                 Console.WriteLine("Для вычисления факториала необходимо ввести целое число:");
 
+            // вычисление факториала
             double out_number = Calculate(number);
 
-            bool flag = true;
+            bool flag = true; //флаг для смены цвета
             while (true)
             {
                 Console.Clear();
@@ -25,6 +26,7 @@ namespace Factorial_of_a_number
                 TextColorChange(flag);
                 BackgroundColorChange(flag);
                 flag = !flag;
+                Task.Delay(200).Wait();
             }
             
         }
@@ -56,29 +58,17 @@ namespace Factorial_of_a_number
         static void TextColorChange(bool flag)
         {
                 if (flag)
-                {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Task.Delay(80).Wait();
-                }
                 else
-                {
                     Console.ForegroundColor = ConsoleColor.White;
-                    Task.Delay(80).Wait();
-                }
         }
 
         static void BackgroundColorChange(bool flag)
         {
             if (flag)
-            {
                 Console.BackgroundColor = System.ConsoleColor.Blue;
-                Task.Delay(80).Wait();
-            }
             else
-            {
                 Console.BackgroundColor = System.ConsoleColor.DarkYellow;
-                Task.Delay(80).Wait();
-            }
         }
     }
 }
